@@ -1,0 +1,92 @@
+# Type labels (exactly one required per issue/PR)
+- name: type:bug
+  color: "d73a4a"
+  description: "Pipeline produced incorrect or bad output"
+
+- name: type:feature
+  color: "a2eeef"
+  description: "New pattern, domain, voice rule, or capability"
+
+- name: type:docs
+  color: "0075ca"
+  description: "Documentation improvement"
+
+- name: type:refactor
+  color: "e4e669"
+  description: "Restructuring without changing behavior"
+
+- name: type:chore
+  color: "ededed"
+  description: "Maintenance, CI, repo infrastructure"
+
+# Status labels (set by maintainers)
+- name: status:needs-review
+  color: "fbca04"
+  description: "Waiting for maintainer review"
+
+- name: status:approved
+  color: "0e8a16"
+  description: "Approved for implementation"
+
+- name: status:in-progress
+  color: "1d76db"
+  description: "Actively being worked on"
+
+- name: status:blocked
+  color: "b60205"
+  description: "Blocked by dependency or decision"
+
+- name: status:wontfix
+  color: "ffffff"
+  description: "Not planned"
+
+# Component labels
+- name: component:orchestrator
+  color: "c5def5"
+  description: "SKILL.md changes"
+
+- name: component:pattern-library
+  color: "c5def5"
+  description: "Post pattern changes"
+
+- name: component:voice-engine
+  color: "c5def5"
+  description: "Voice, audience detection, AI tells"
+
+- name: component:cognitive-engine
+  color: "c5def5"
+  description: "Bayesian, risk, calibration"
+
+- name: component:domain-brain
+  color: "c5def5"
+  description: "Domain knowledge"
+
+- name: component:quality-gate
+  color: "c5def5"
+  description: "Quality checks, anti-patterns"
+
+# Priority labels
+- name: priority:high
+  color: "b60205"
+  description: "Causes bad responses frequently"
+
+- name: priority:medium
+  color: "fbca04"
+  description: "Causes bad responses occasionally"
+
+- name: priority:low
+  color: "0e8a16"
+  description: "Nice to have improvement"
+
+# Effort labels
+- name: effort:small
+  color: "c2e0c6"
+  description: "< 1 hour"
+
+- name: effort:medium
+  color: "fef2c0"
+  description: "1-4 hours"
+
+- name: effort:large
+  color: "f9d0c4"
+  description: "> 4 hours"

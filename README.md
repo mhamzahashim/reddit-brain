@@ -1,69 +1,53 @@
 # Reddit Brain
 
-A 10-stage cognitive pipeline that turns an AI into a battle-scarred 50-year-old marketer who writes Reddit comments indistinguishable from a real human expert.
+Persistent cognitive pipeline for writing Reddit comments that are indistinguishable from a real human expert. Built as a [Claude Code](https://claude.ai/code) skill.
 
-Built for [Claude Code](https://claude.ai/code) as a skill. Not a chatbot. Not a prompt template. A full diagnostic and response system.
+Not a chatbot. Not a prompt template. A 10-stage diagnostic system that classifies posts, detects audiences, calibrates confidence, checks for AI tells, and outputs ready-to-paste responses.
 
 ---
 
-## The Problem It Solves
+## Quick Start
 
-Standard AI Reddit responses fail in predictable ways:
+```bash
+# Clone
+git clone https://github.com/mhamzahashim/reddit-brain.git
 
-- **Too long.** AI writes 5 paragraphs when 2 sentences would land.
-- **Too generic.** "Focus on your target audience" is not advice. It's a fortune cookie.
-- **Too obvious.** It says what Google already said, adding zero value.
-- **Sounds like AI.** "Great question! Let me break this down for you." Instant credibility death.
-- **No diagnosis.** It answers the literal question instead of the real problem.
-- **No research.** It guesses at facts instead of verifying them.
-- **No audience awareness.** Same tone for a scared beginner and a cocky expert.
+# Install to Claude Code
+mkdir -p ~/.claude/skills/reddit/references
+cp reddit-brain/skill/SKILL.md ~/.claude/skills/reddit/
+cp reddit-brain/skill/references/*.md ~/.claude/skills/reddit/references/
 
-This system fixes all of them.
+# Use
+# Type /reddit in Claude Code, paste a Reddit post
+```
 
 ---
 
 ## How It Works
 
-The pipeline processes every Reddit post through 10 sequential stages. Each stage has one job and loads only the reference material it needs.
-
 ```
-POST IN
-  |
-  v
-[Stage 1] PARSE INPUT ............... Thread only? Thread + comments? Operator instructions?
-  |
-  v
-[Stage 2] CLASSIFY POST ............. Match against 15 diagnostic patterns (loads pattern-library.md)
-  |
-  v
-[Stage 3] DETECT AUDIENCE ........... Expertise, emotion, personality, culture (loads voice-engine.md)
-  |
-  v
-[Stage 4] CHECK GATES ............... Crisis? Troll? Ethical? Professional referral? Wrong premise?
-  |
-  v
-[Stage 5] RESEARCH .................. Verify claims, check facts, find counter-evidence (when needed)
-  |
-  v
-[Stage 6] CALIBRATE ................. Bayesian updating, risk assessment, mode selection (loads cognitive-engine.md, complex posts only)
-  |
-  v
-[Stage 7] SET LENGTH ................. Hard limits BEFORE writing. Match the room.
-  |
-  v
-[Stage 8] DRAFT ..................... Write using all context + domain knowledge (loads domain-brain.md if relevant)
-  |
-  v
-[Stage 9] QUALITY GATE .............. 10-check critic + 15-vector AI tell scan (loads quality-gate.md)
-  |
-  v
-[Stage 10] CUT AND OUTPUT ........... Delete fluff. Delete restated content. Output ready-to-paste response.
-  |
-  v
-PASTE INTO REDDIT
+Reddit Post → PARSE → CLASSIFY → DETECT AUDIENCE → GATE CHECK → RESEARCH
+                                                                    ↓
+                         Ready-to-Paste ← CUT ← QUALITY GATE ← DRAFT ← CALIBRATE
 ```
 
-At any point, the system holds ~750 lines in context: the 223-line orchestrator (SKILL.md) plus whichever 200-300 line reference the current stage needs. Not 302,213 words of flat research. The right knowledge, at the right time, for the right post.
+Each stage has one job. Each reference file loads only when its stage runs. At any point, the system holds ~750 lines of active context: not 302,213 words of flat research.
+
+| Stage | Job | Reference Loaded |
+|---|---|---|
+| 1. Parse Input | Format 1 (thread) or Format 2 (thread+comments)? | None |
+| 2. Classify Post | Match against 15 diagnostic patterns | `pattern-library.md` |
+| 3. Detect Audience | Expertise, emotion, personality, culture | `voice-engine.md` |
+| 4. Check Gates | Crisis? Troll? Ethical? Wrong premise? | None |
+| 5. Research | Verify facts, find counter-evidence | None (uses web tools) |
+| 6. Calibrate | Bayesian updating, risk, confidence (complex only) | `cognitive-engine.md` |
+| 7. Set Length | Hard limits BEFORE writing | None |
+| 8. Draft | Write using all accumulated context | `domain-brain.md` (if relevant) |
+| 9. Quality Gate | 10-check critic + 15-vector AI tell scan | `quality-gate.md` |
+| 10. Cut & Output | Remove fluff, output ready-to-paste | None |
+
+For a casual 1-sentence reply: stages 1, 2, 4, 7, 8, 10 (~7.7K tokens).
+For a complex strategic post: all 10 stages (~11.8K tokens).
 
 ---
 
@@ -71,171 +55,189 @@ At any point, the system holds ~750 lines in context: the 223-line orchestrator 
 
 ```
 skill/
-|
-+-- SKILL.md (223 lines) ................. The orchestrator
-|   +-- Identity .......................... 50-year-old veteran marketer persona
-|   +-- Length Law ........................ Hard limits, override everything
-|   +-- Input Parsing .................... Thread-only vs thread+comments
-|   +-- Voice ............................. Phrases, rhythm, formatting, humor
-|   +-- Gate Checks ....................... 6 safety gates
-|   +-- Hard Rules ........................ 14 non-negotiable constraints
-|   +-- Execution Pipeline ................ 10-stage routing logic
-|
-+-- references/
-    +-- pattern-library.md (266 lines) .... 15 post patterns with diagnostic checklists
-    +-- voice-engine.md (259 lines) ....... Audience detection + AI tell suppression
-    +-- cognitive-engine.md (276 lines) ... Bayesian updating + risk assessment
-    +-- domain-brain.md (135 lines) ....... 12 domains, practitioner-level insights only
-    +-- quality-gate.md (183 lines) ....... 10-check critic + 15-vector AI detection
+├── SKILL.md (223 lines) .............. Orchestrator
+│   ├── Identity ...................... 50-year-old veteran marketer persona
+│   ├── Length Law .................... Hard limits (overrides everything)
+│   ├── Input Parsing ................. Thread-only vs thread+comments
+│   ├── Voice ......................... Phrases, banned phrases, rhythm, humor
+│   ├── Gate Checks ................... 6 safety gates
+│   ├── Hard Rules .................... 14 non-negotiable constraints
+│   └── Execution Pipeline ............ 10-stage routing with reference loading
+│
+└── references/
+    ├── pattern-library.md (266 lines)  15 patterns + diagnostic checklists
+    ├── voice-engine.md (259 lines) ... Audience detection + AI tell suppression
+    ├── cognitive-engine.md (276 lines) Bayesian updating + risk assessment
+    ├── domain-brain.md (135 lines) ... 12 domains, practitioner insights
+    └── quality-gate.md (183 lines) ... 10-check critic + 15-vector AI scan
 ```
 
-**Total: 1,342 lines of active knowledge** condensed from 302,213 words of research across 37 source files.
+**1,342 lines total.** Condensed from 37 research files (302,213 words).
 
 ---
 
-## What Each Reference Contains
+## The Problem It Solves
+
+Standard AI Reddit responses fail in 7 predictable ways:
+
+| Failure | Why It Happens | How Reddit Brain Fixes It |
+|---|---|---|
+| **Too long** | No length commitment before writing | Length Law at top of prompt, committed at Stage 7 |
+| **Too generic** | No audience detection | 4 detection trees: expertise, emotion, personality, culture |
+| **Too obvious** | No originality check | Quality gate Check E: "Can you Google this in 30 seconds?" |
+| **Sounds like AI** | No tell detection | 15-vector AI scan + 40+ banned phrases |
+| **Wrong diagnosis** | No classification | 15 patterns with 5-point diagnostic checklists |
+| **No research** | No verification step | Stage 5 triggers for factual claims |
+| **Ignores context** | No thread awareness | Format 2 parsing: reads all comments, adds what's missing |
+
+---
+
+## Reference Files
 
 ### pattern-library.md
-15 Reddit post patterns, each with:
-- Surface appearance vs underlying reality
-- 5-point diagnostic checklist
-- Confidence threshold
-- Misdiagnosis cost (what goes wrong if you get it wrong)
-- Expert response strategy
 
-Patterns include: XY Problem, Validation Seeker, Grief Poster, Humble Brag, Overwhelmed Novice, Confident Incompetent, Analysis Paralysis, Sunk Cost Prisoner, and more.
+15 post patterns, each with surface appearance, underlying reality, 5-point diagnostic checklist, confidence threshold, misdiagnosis cost, and expert response strategy.
 
-Also contains: 5 "Something Feels Off" detectors, 8 rapid-assessment heuristics, compound pattern rules.
+**Patterns**: XY Problem, Validation Seeker, Grief Poster, Humble Brag, Overwhelmed Novice, Confident Incompetent, Analysis Paralysis, Sunk Cost Prisoner, Comparison Spiraler, Feature Creep Victim, Guru Bait, Rage Poster, Am I Wrong, Burnout Denier, Shiny Object Chaser.
+
+Plus: 5 "Something Feels Off" detectors, 8 rapid heuristics, compound pattern rules.
 
 ### voice-engine.md
-- Expertise level detection tree (beginner to expert signals)
-- Emotional state detection (6 states with textual cues)
-- DISC personality detection from writing patterns
-- 8 emotional state response protocols with genuine vs fake examples
-- 15-vector AI tell detection and RLHF fingerprint suppression
-- Voice drift prevention (phrase anchors, anti-phrase guards, 60/40 rule)
-- Cultural context detection
+
+4 audience detection trees (expertise level, emotional state, DISC personality, cultural context). 8 emotional state response protocols with genuine vs fake empathy examples. 15-vector AI tell detection. Voice drift prevention with phrase anchors and anti-phrase guards.
 
 ### cognitive-engine.md
-- Bayesian updating protocol (prior, evidence, posterior)
-- Advisor's Dilemma (directive/exploratory/validate/challenge matrix)
-- Risk assessment (reversible vs irreversible, Taleb asymmetry test)
-- 5-level confidence calibration with language patterns
-- 8 rapid heuristics (Cui Bono, Base Rate, What's Missing, Reversibility, 10/10/10, Status Quo, Taxi Driver, Asymmetry)
-- Decision trees: teach vs tell, how much detail, should I respond at all, person is wrong about something
+
+Loaded only for complex/strategic posts. Bayesian updating (prior, evidence, posterior). Advisor's Dilemma: 4-mode matrix (directive/exploratory/validate/challenge). Risk assessment (Bezos Type 1/2, Taleb asymmetry, regret minimization). 5-level confidence calibration. 8 rapid heuristics. 4 decision trees. 8-point debiasing checklist.
 
 ### domain-brain.md
-12 domains with practitioner-level, non-obvious insights:
 
-SaaS & Startups, SEO (2025-2026), Digital Marketing, Web Development, AI & Automation, Copywriting & Conversion, Freelancing & Business, Productivity, Paid Ads, E-commerce, B2B Sales, Pricing Psychology.
-
-Every line is actionable. Nothing Google-able.
+12 domains with practitioner-level, non-obvious insights: SaaS, SEO (2025-2026), Digital Marketing, Web Dev, AI/Automation, Copywriting, Freelancing, Productivity, Paid Ads, E-commerce, B2B Sales, Pricing Psychology. Every line actionable. Nothing Google-able.
 
 ### quality-gate.md
-- 10-check Internal Critic with pass/fail criteria and rewrite strategies (relevance, accuracy, tone, length, originality, humanity, harm, completeness, bias, persona)
-- 15-vector AI tell detection (vocabulary fingerprints, structural uniformity, hedge density, emotional flatness, etc.)
-- 10 cognitive anti-patterns (Kitchen Sink, Expertise Performance, Premature Commit, Empathy Skip, etc.)
-- Golden rules with specific thresholds
 
----
-
-## Why It's Different
-
-| Dimension | Typical AI Prompt | Reddit Brain Pipeline |
-|---|---|---|
-| Active knowledge | Flat document, everything at once | Staged loading: right reference at right time |
-| Post classification | "Identify post type" (no criteria) | 15 patterns with 5-point diagnostic checklists |
-| Audience detection | "Assess the poster" (no system) | 4 detection trees (expertise, emotion, personality, culture) |
-| Uncertainty handling | Same confident tone for everything | 5-level calibration + Bayesian updating |
-| Quality check | Generic checklist, no enforcement | 10-check critic + 15-vector AI tell scan with rewrite triggers |
-| Length control | Buried in the prompt, ignored | Top of prompt, hard limits, committed BEFORE writing |
-| Research | None | Mandatory for factual claims |
-| Thread awareness | None | Parses comments, matches energy, adds what's MISSING |
-
----
-
-## The Length Law
-
-The single most important rule. Overrides everything:
-
-- **Casual/discussion thread**: 1-3 sentences. Period.
-- **Rant/vent post**: 2-4 sentences. Match their energy.
-- **Technical question with a clear answer**: Answer + one sentence of context.
-- **Complex diagnostic/strategic post**: Up to 2-3 short paragraphs. The ONLY case where length is justified.
-
-If the thread has comments and everyone writes 1-2 sentences, you write 1-2 sentences. Never be the longest comment in the thread.
-
----
-
-## Installation
-
-### For Claude Code
-
-1. Clone this repo:
-   ```bash
-   git clone https://github.com/mhamzahashim/reddit-brain.git
-   ```
-
-2. Copy the skill to your Claude Code skills directory:
-   ```bash
-   mkdir -p ~/.claude/skills/reddit/references
-   cp reddit-brain/skill/SKILL.md ~/.claude/skills/reddit/
-   cp reddit-brain/skill/references/*.md ~/.claude/skills/reddit/references/
-   ```
-
-3. Use `/reddit` in Claude Code, or paste a Reddit post and ask for a response.
-
-### Manual Use
-
-The files work as a modular prompt system. SKILL.md is the orchestrator: it tells the AI which reference to load at each stage. You can adapt this to any AI platform that supports multi-file prompts or tool use.
+10-check Internal Critic (relevance, accuracy, tone, length, originality, humanity, harm, completeness, bias, persona) with pass/fail criteria and specific rewrite strategies. 15-vector AI tell detection. 10 cognitive anti-patterns. Rewrite escalation: 1-2 failures = targeted edit, 3+ = full redraft.
 
 ---
 
 ## Usage
 
-In Claude Code, just type `/reddit` and paste the Reddit post. The skill auto-triggers when it detects Reddit content.
+### Format 1: Thread Only
 
-**Format 1: Thread only**
 Paste just the original post. The system writes a top-level comment.
 
-**Format 2: Thread + comments**
+```
+/reddit
+
+r/Entrepreneur
+Title: Is $5K enough to start a SaaS?
+Body: I have $5K saved up and want to build a SaaS product...
+```
+
+### Format 2: Thread + Comments
+
 Paste the post and all existing comments. The system reads everything, maps what's been said, and adds what's MISSING.
 
-**Operator instructions**
-Add constraints before or after the post: "max 2 lines", "disagree on a point", "research before answering", "focus on SEO angle".
+```
+/reddit
+
+r/SaaS
+Title: My SaaS has been stuck at $3K MRR...
+Body: ...
+---
+u/saas_veteran (142 upvotes): Have you talked to churned customers?
+u/growthguy (89 upvotes): What's your pricing?
+```
+
+### Operator Instructions
+
+Add constraints before or after the post:
+
+| Instruction | Effect |
+|---|---|
+| `max 2 lines` | Hard length constraint |
+| `disagree on a point` | Forces contrarian angle |
+| `research before answering` | Forces Stage 5 |
+| `focus on SEO angle` | Loads domain-brain, prioritizes SEO |
+| `50 words` | Exact word count |
+
+### Output
+
+Always: just the response text, ready to paste. No preamble, no quotes, no meta-commentary.
 
 ---
 
 ## The Persona
 
-A 50-year-old veteran who has been building, marketing, and selling for over two decades. Launched SaaS products. Burned money on bad ad campaigns. Built and lost businesses. Ranked pages on Google and watched them tank. Sat through enough pitch decks to smell BS from the title slide.
+A 50-year-old veteran who has been building, marketing, and selling for 20+ years. Launched SaaS products. Burned money on bad ad campaigns. Built and lost businesses. Ranked pages on Google and watched them tank. Sat through enough pitch decks to smell BS from the title slide.
 
-Confident because earned. Direct because respectful of time. Specific always. Anti-hype because burned enough times.
+**Vocabulary**: "Ship it." / "Run the numbers." / "I've seen this movie before." / "The boring answer is usually the right one."
 
-Not an assistant. A person with scars, opinions, and hard-won wisdom from being wrong many times.
+**Banned vocabulary** (40+ phrases, absolute ban): "Great question!" / "Let me break this down" / "Hope this helps!" / "Leverage" / "Game-changer" / "Holistic" / "Delve" / "Navigate" / all corporate jargon.
+
+---
+
+## Comparison
+
+| Dimension | Flat System Prompt | Reddit Brain |
+|---|---|---|
+| Context loaded | Everything, always (~5K words) | Staged: right reference at right time (~750 lines max) |
+| Post classification | "Identify post type" (no criteria) | 15 patterns, 5-point checklists, misdiagnosis costs |
+| Audience detection | "Assess the poster" (no system) | 4 trees: expertise, emotion, personality, culture |
+| Uncertainty | Same confident tone for everything | 5-level calibration + Bayesian updating |
+| Quality control | Generic checklist | 10-check critic + 15-vector AI tell scan + rewrite strategies |
+| Length control | Rule buried at line 247, ignored ~60% | Top of prompt, hard limits, committed before writing |
+| Research | None | Mandatory for factual claims |
+| Thread awareness | None | Reads comments, matches energy, adds what's missing |
+| Token cost (casual) | ~8K tokens (all loaded) | ~3.5K tokens (SKILL.md only) |
+| Token cost (complex) | ~8K tokens (all loaded) | ~11.8K tokens (targeted loading) |
+
+---
+
+## Documentation
+
+| Document | Content |
+|---|---|
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Design decisions, pipeline architecture, research foundation |
+| [DOCS.md](DOCS.md) | Full technical reference for all components |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | How to add patterns, domains, voice rules |
+| [CHANGELOG.md](CHANGELOG.md) | Version history |
+| [docs/installation.md](docs/installation.md) | Detailed setup for Claude Code and other platforms |
+| [docs/pipeline-stages.md](docs/pipeline-stages.md) | Deep dive into each of the 10 stages |
+| [docs/customization.md](docs/customization.md) | How to change persona, add domains, adjust settings |
+| [docs/design-decisions.md](docs/design-decisions.md) | Why every decision was made |
+| [examples/](examples/) | Real input/output examples with pipeline traces |
 
 ---
 
 ## Research Foundation
 
-This system was built from 37 research files totaling 302,213 words, including:
+Condensed from 37 files totaling 302,213 words:
 
-- Reddit Pattern Recognition Engine (911 lines)
-- Intuition Engine (1,106 lines)
-- Communication Adaptation Engine (1,104 lines)
-- Empathy Engine (854 lines)
-- Persona Engineering Document (875 lines)
-- Decision-Making Under Uncertainty Framework (739 lines)
-- Meta-Cognitive Operating System (921 lines)
-- Cognitive Architecture Blueprint (583 lines)
-- Naturalness Benchmark (731 lines)
-- Domain expertise benchmarks across 12 verticals
-- 200+ post testing results and failure pattern analysis
+| Source Document | Lines | Condensed Into |
+|---|---|---|
+| Reddit Pattern Recognition Engine | 911 | pattern-library.md |
+| Intuition Engine | 1,106 | pattern-library.md |
+| Communication Adaptation Engine | 1,104 | voice-engine.md |
+| Empathy Engine | 854 | voice-engine.md |
+| Persona Engineering Document | 875 | voice-engine.md |
+| Decision-Making Under Uncertainty | 739 | cognitive-engine.md |
+| Meta-Cognitive Operating System | 921 | cognitive-engine.md |
+| Cognitive Architecture Blueprint | 583 | cognitive-engine.md |
+| Naturalness Benchmark | 731 | quality-gate.md |
+| Domain expertise benchmarks (12) | ~3,000 | domain-brain.md |
+| 200+ post test results | ~2,000 | quality-gate.md |
 
-All condensed into 1,342 lines of active, stage-loaded knowledge.
+Draws from peer-reviewed research in expert cognition, clinical reasoning, decision science, Bayesian inference, metacognition, motivational interviewing, and writing process theory. Full bibliography in [ARCHITECTURE.md](ARCHITECTURE.md#research-foundation).
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). All changes start with an issue. Patterns need 5+ real Reddit posts for validation. Voice changes need 10+ diverse post tests.
 
 ---
 
 ## License
 
-MIT
+[MIT](LICENSE)
