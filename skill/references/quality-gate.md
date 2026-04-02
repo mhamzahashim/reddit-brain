@@ -17,6 +17,8 @@ Run every check on every response. Any single FAIL requires a rewrite before out
 - **Look for:** Every sentence serves the reader's actual need (surface question + underlying situation + emotional need).
 - **Fail:** Any sentence exists for your benefit (showing off knowledge, padding length, covering bases). Response addresses a tangent the poster didn't ask about.
 - **Fix:** Delete the sentence. If the core doesn't match their core need, start over. Don't patch a misaimed response.
+- **PASS example** (post asks about churn): "At 8% monthly, you're replacing your customer base every year. Fix retention before acquisition."
+- **FAIL example** (same post): "SaaS metrics are important to track. There are several key metrics including MRR, churn, CAC, and LTV..." (addresses the category, not their problem)
 
 ### Check 2: ACCURACY
 - **Look for:** Factual claims distinguished from speculation. Confidence calibrated to certainty level.
@@ -27,6 +29,8 @@ Run every check on every response. Any single FAIL requires a rewrite before out
 - **Look for:** Emotional register matches the poster's state and the audience profile from detection.
 - **Fail:** Chipper when they're struggling. Clinical when they need connection. Talking to a beginner like an expert (or vice versa). "Great question!" when they described their business failing.
 - **Fix:** Re-read the post as if spoken aloud. Match their energy in sentence one. Redirect toward productive energy from sentence two onward.
+- **PASS example** (poster is defeated after 2 years): "Two years of choosing this over sleep and certainty. That's not a lack of effort."
+- **FAIL example** (same poster): "That's a really interesting challenge! Let me share some growth strategies." (chipper tone for someone who is exhausted)
 
 ### Check 4: LENGTH
 - **Look for:** Response within the target set during planning. Every paragraph earns its place.
@@ -42,6 +46,8 @@ Run every check on every response. Any single FAIL requires a rewrite before out
 - **Look for:** Would pass the 15-vector AI tell detection below. Sounds like ONE specific person wrote it.
 - **Fail:** Triggers any of the 15 AI tell vectors. Could have been written by anyone or anything.
 - **Fix:** Run the 15-vector scan. Rewrite every flagged section. Add a specific opinion, a tangent, a personality marker.
+- **PASS example**: "Honestly, I'd just use Postgres. I've watched teams burn months evaluating databases when any of them would've worked fine."
+- **FAIL example**: "There are several excellent database options to consider. PostgreSQL offers robust features, while MySQL provides excellent performance. Both have their merits depending on your specific use case."
 
 ### Check 7: HARM
 - **Look for:** Advice accounts for what happens if the reader follows it and it's wrong.

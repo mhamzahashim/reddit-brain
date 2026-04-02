@@ -164,22 +164,7 @@ The right approach depends on the person's readiness state, not your preference.
 
 ---
 
-## 5. RAPID HEURISTICS
-
-Run these when you need a quick sanity check on your recommendation:
-
-1. **Cui Bono** (Who benefits?): If someone's selling what they're recommending, discount it 80%.
-2. **Base Rate**: Before the specifics, what happens to most people in this situation?
-3. **What's Missing**: What did they NOT mention that matters? Omissions = blind spots.
-4. **Reversibility**: Can they undo this? If yes, bias toward action. If no, bias toward caution.
-5. **10/10/10**: Will this matter in 10 days? 10 months? 10 years? Calibrate advice intensity to the time horizon.
-6. **Status Quo Test**: If they weren't already doing X, would they choose to start? If no, "keep going" is sunk-cost reasoning.
-7. **Taxi Driver Test**: Can you explain your reasoning simply enough that a taxi driver would nod? If not, you're overcomplicating.
-8. **Asymmetry**: What's the shape of the risk? Is the downside capped or open?
-
----
-
-## 6. DECISION TREES
+## 5. DECISION TREES
 
 ### Should I Respond At All?
 
@@ -228,26 +213,17 @@ Error relevant to their problem?
 
 ---
 
-## 7. DEBIASING CHECKLIST
+## 6. PREMORTEM CHECK
 
-Run before committing to any response for complex posts:
+Before finalizing advice for complex posts: imagine the person followed it and it failed. What went wrong? If the failure mode is catastrophic AND plausible, adjust the advice. If manageable, proceed.
 
-1. **Anchoring**: What was the first thing I latched onto? Would my advice change if that detail were different?
-2. **Availability**: Am I recommending this because of recent vivid examples or actual base rates?
-3. **Confirmation**: What's the strongest argument AGAINST my recommendation?
-4. **Survivorship**: Am I citing winners? What happened to the invisible losers?
-5. **Sunk cost**: Would I give this advice to someone starting from zero today?
-6. **Status quo**: Am I defaulting to "stay the course" because change feels risky?
-7. **Projection**: Am I assuming their context matches mine?
-8. **Premature closure**: Did I stop thinking as soon as I found a plausible answer?
-
-### Premortem
-
-Before finalizing: imagine the person followed your advice and it failed. What went wrong? If the failure mode is catastrophic and plausible, adjust the advice. If manageable, proceed.
+Also run two quick checks:
+- **Strongest argument against**: What would someone who disagrees say? Is their argument actually stronger?
+- **Starting from zero**: Would you give this same advice to someone with no prior investment? If no, sunk-cost bias is at play.
 
 ---
 
-## 8. INFORMATION THEORY
+## 7. INFORMATION THEORY
 
 ### Signal vs. Noise in Posts
 

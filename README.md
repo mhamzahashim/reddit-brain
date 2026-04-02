@@ -53,26 +53,70 @@ For a complex strategic post: all 10 stages (~11.8K tokens).
 
 ## Architecture
 
+### Repository Structure
+
 ```
-skill/
-├── SKILL.md (223 lines) .............. Orchestrator
-│   ├── Identity ...................... 50-year-old veteran marketer persona
-│   ├── Length Law .................... Hard limits (overrides everything)
-│   ├── Input Parsing ................. Thread-only vs thread+comments
-│   ├── Voice ......................... Phrases, banned phrases, rhythm, humor
-│   ├── Gate Checks ................... 6 safety gates
-│   ├── Hard Rules .................... 14 non-negotiable constraints
-│   └── Execution Pipeline ............ 10-stage routing with reference loading
+reddit-brain/
 │
-└── references/
-    ├── pattern-library.md (266 lines)  15 patterns + diagnostic checklists
-    ├── voice-engine.md (259 lines) ... Audience detection + AI tell suppression
-    ├── cognitive-engine.md (276 lines) Bayesian updating + risk assessment
-    ├── domain-brain.md (135 lines) ... 12 domains, practitioner insights
-    └── quality-gate.md (183 lines) ... 10-check critic + 15-vector AI scan
+├── README.md ························ You are here
+├── ARCHITECTURE.md ·················· Design decisions + pipeline deep dive
+├── DOCS.md ·························· Full technical reference (all components)
+├── CONTRIBUTING.md ·················· How to add patterns, domains, voice rules
+├── CHANGELOG.md ····················· Version history
+├── LICENSE ·························· MIT
+│
+├── skill/ ··························· The actual skill (install this)
+│   ├── SKILL.md (303 lines) ········ Orchestrator + critical inlines
+│   │   ├── Identity ················· 50-year-old veteran marketer persona
+│   │   ├── Length Law ··············· Hard limits (overrides everything)
+│   │   ├── Input Parsing ············ Thread-only vs thread+comments
+│   │   ├── Voice ···················· Phrases, banned phrases, rhythm, humor
+│   │   ├── Gate Checks ·············· 6 safety gates
+│   │   ├── Hard Rules ··············· 14 non-negotiable constraints
+│   │   ├── Execution Pipeline ······· 10-stage routing with reference loading
+│   │   ├── Critical Patterns ········ Top 5 patterns (always loaded)
+│   │   ├── Critical AI Tells ········ Top 5 tells (always loaded)
+│   │   └── Golden Examples ·········· 4 annotated correct outputs
+│   │
+│   └── references/
+│       ├── pattern-library.md (266)   15 patterns + diagnostic checklists
+│       ├── voice-engine.md (227) ···· Audience detection + voice drift
+│       ├── cognitive-engine.md (252)  Bayesian updating + risk assessment
+│       ├── domain-brain.md (145) ···· 12 domains, practitioner insights
+│       └── quality-gate.md (189) ···· 10-check critic + 15-vector AI scan
+│
+├── docs/
+│   ├── installation.md ·············· Setup for Claude Code + other platforms
+│   ├── pipeline-stages.md ··········· Deep dive into all 10 stages
+│   ├── customization.md ············· Change persona, add domains/patterns
+│   └── design-decisions.md ·········· 14 decisions with evidence + tradeoffs
+│
+├── examples/
+│   └── README.md ···················· 5 examples with full pipeline traces
+│
+└── .github/
+    ├── ISSUE_TEMPLATE/
+    │   ├── bug_report.md ············ Stage-specific bug reporting
+    │   ├── feature_request.md ······· Component-tagged requests
+    │   └── pattern_request.md ······· New pattern proposals
+    ├── PULL_REQUEST_TEMPLATE.md ····· Testing table + checklist
+    └── labels.yml ··················· Type, status, component, priority labels
 ```
 
-**1,342 lines total.** Condensed from 37 research files (302,213 words).
+### Skill File Breakdown
+
+```
+skill/
+├── SKILL.md (303 lines) ·············· Orchestrator + critical inlines
+└── references/
+    ├── pattern-library.md (266 lines)  Stage 2: post classification
+    ├── voice-engine.md (227 lines) ··· Stage 3: audience detection
+    ├── cognitive-engine.md (252 lines)  Stage 6: calibration (complex only)
+    ├── domain-brain.md (145 lines) ··· Stage 8: domain knowledge (if relevant)
+    └── quality-gate.md (189 lines) ··· Stage 9: quality checks
+```
+
+**1,382 lines total.** Condensed from 37 research files (302,213 words). Zero duplication between files.
 
 ---
 
@@ -104,11 +148,11 @@ Plus: 5 "Something Feels Off" detectors, 8 rapid heuristics, compound pattern ru
 
 ### voice-engine.md
 
-4 audience detection trees (expertise level, emotional state, DISC personality, cultural context). 8 emotional state response protocols with genuine vs fake empathy examples. 15-vector AI tell detection. Voice drift prevention with phrase anchors and anti-phrase guards.
+4 audience detection trees (expertise level, emotional state, DISC personality, cultural context). 8 emotional state response protocols with genuine vs fake empathy examples. Voice drift prevention with phrase anchors, anti-phrase guards, and the 60/40 rule. (AI tell detection lives in quality-gate.md to avoid duplication.)
 
 ### cognitive-engine.md
 
-Loaded only for complex/strategic posts. Bayesian updating (prior, evidence, posterior). Advisor's Dilemma: 4-mode matrix (directive/exploratory/validate/challenge). Risk assessment (Bezos Type 1/2, Taleb asymmetry, regret minimization). 5-level confidence calibration. 8 rapid heuristics. 4 decision trees. 8-point debiasing checklist.
+Loaded only for complex/strategic posts (explicit complexity test in SKILL.md). Bayesian updating (prior, evidence, posterior). Advisor's Dilemma: 4-mode matrix (directive/exploratory/validate/challenge). Risk assessment (Bezos Type 1/2, Taleb asymmetry). 5-level confidence calibration. 4 decision trees. Premortem check. Signal vs noise analysis. (Rapid heuristics live in pattern-library.md to avoid duplication.)
 
 ### domain-brain.md
 
@@ -189,8 +233,8 @@ A 50-year-old veteran who has been building, marketing, and selling for 20+ year
 | Length control | Rule buried at line 247, ignored ~60% | Top of prompt, hard limits, committed before writing |
 | Research | None | Mandatory for factual claims |
 | Thread awareness | None | Reads comments, matches energy, adds what's missing |
-| Token cost (casual) | ~8K tokens (all loaded) | ~3.5K tokens (SKILL.md only) |
-| Token cost (complex) | ~8K tokens (all loaded) | ~11.8K tokens (targeted loading) |
+| Token cost (casual) | ~8K tokens (all loaded) | ~4.8K tokens (SKILL.md with critical inlines) |
+| Token cost (complex) | ~8K tokens (all loaded) | ~12K tokens (targeted loading) |
 
 ---
 

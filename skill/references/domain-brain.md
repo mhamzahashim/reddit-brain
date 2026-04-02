@@ -94,11 +94,14 @@ Loaded at Stage 8 (DRAFT) when the post touches a specific domain. Non-obvious i
 
 ## Productivity
 
-- The most productive thing is deciding what NOT to work on.
-- Tools are containers. The system is what goes in them and when you review it.
-- If you are working 80-hour weeks, you have a prioritization problem, not a productivity problem.
-- Context switching costs 20-40 minutes per switch. Batch similar work. Protect focus blocks.
+- The most productive thing is deciding what NOT to work on. If everything is priority 1, nothing is.
+- Tools are containers. The system is what goes in them and when you review it. A $0 paper notebook with a daily review beats a $200/yr app with no review habit.
+- If you are working 80-hour weeks, you have a prioritization problem, not a productivity problem. Adding hours to a broken system produces more broken output.
+- Context switching costs 20-40 minutes per switch. Batch similar work. Protect focus blocks. Two 4-hour deep work blocks beat eight 1-hour fragmented blocks.
 - Most productivity advice is procrastination disguised as optimization. Ship the thing.
+- Energy management beats time management. Schedule creative work during peak hours, admin during troughs. Track your energy for one week to find the pattern.
+- The two-minute rule is real: if it takes less than two minutes, do it now. Everything else goes on the list.
+- "I need to plan more" is usually code for "I'm scared to start." Planning past 80% certainty is avoidance.
 
 ## Paid Ads
 
@@ -111,25 +114,32 @@ Loaded at Stage 8 (DRAFT) when the post touches a specific domain. Non-obvious i
 
 ## E-commerce
 
-- Product photography is the highest-ROI investment for any e-commerce store. One good photo sells more than ten paragraphs of copy.
-- Shipping and returns policy drives conversion more than price for most products above $30.
-- Email flows (abandoned cart, post-purchase, win-back) outperform campaigns. Set up automation before newsletters.
-- Amazon takes 30-40% of your margin but gives you distribution. Your own store gives you margin but costs you distribution. Most brands need both.
+- Product photography is the highest-ROI investment for any e-commerce store. One good photo sells more than ten paragraphs of copy. Lifestyle photos (product in use) convert 30-40% better than white-background studio shots for most categories.
+- Shipping and returns policy drives conversion more than price for most products above $30. "Free returns" reduces purchase anxiety more than a 10% discount.
+- Email flows (abandoned cart, post-purchase, win-back) outperform campaigns. Set up automation before newsletters. An abandoned cart sequence alone typically recovers 5-15% of lost sales.
+- Amazon takes 30-40% of your margin but gives you distribution. Your own store gives you margin but costs you distribution. Most brands need both. Use Amazon for discovery, own site for margin and customer data.
 - Review count matters more than review score above 4.0. 100 reviews at 4.2 outsells 5 reviews at 5.0.
+- Average order value (AOV) is the most underleveraged metric. A "frequently bought together" section or free shipping threshold at 1.5x your current AOV lifts revenue without new traffic.
+- Mobile checkout friction kills conversions. If your checkout takes more than 3 taps on mobile, you're losing 20-30% of buyers at the last step.
 
 ## B2B Sales
 
-- At deal sizes under $10K, self-serve + content marketing wins. At $10K-$100K, inside sales + demos. Above $100K, field sales + relationships.
+- At deal sizes under $10K, self-serve + content marketing wins. At $10K-$100K, inside sales + demos. Above $100K, field sales + relationships. Mismatching the channel to the deal size burns money.
 - The best sales process removes friction for the buyer, not for the seller. Every step you add that does not help THEM decide is a step where they drop off.
-- Proposals should be 80% about the client's problem and 20% about your solution. Most proposals are the reverse.
-- Follow up 5-7 times. 80% of deals close after the 5th contact. Most sellers stop at 2.
+- Proposals should be 80% about the client's problem and 20% about your solution. Most proposals are the reverse. Lead with their pain, not your features.
+- Follow up 5-7 times. 80% of deals close after the 5th contact. Most sellers stop at 2. Persistence is not annoying if each follow-up adds value.
 - The buyer's real objection is almost never the stated objection. "It's too expensive" usually means "I don't see the value" or "I can't justify this to my boss."
+- Sales cycle length is the best predictor of close probability. If a deal hasn't moved in 2x the average cycle length, it's dead. Stop investing time.
+- Champions inside the buyer's org close deals, not your sales pitch. Find the person whose career benefits from your product succeeding.
 
 ## Pricing Psychology
 
-- Anchoring: show the expensive option first to make the target option feel reasonable.
-- The "decoy effect": a third, slightly worse option makes the target option obviously superior.
-- Annual pricing should offer 2 months free, not "17% off." Same math, different psychology.
-- Price in round numbers for emotional purchases. Precise numbers ($497 vs $500) for analytical buyers.
-- Three tiers work because of the compromise effect: most people pick the middle. Design the middle tier to be your target.
-- Free tiers create users, not customers. If you offer free, have a clear conversion trigger (usage limit, feature gate, time limit).
+- Anchoring: show the expensive option first to make the target option feel reasonable. The first number a buyer sees becomes the reference point for everything after.
+- The "decoy effect": a third, slightly worse option makes the target option obviously superior. This is why SaaS companies have three tiers, not two.
+- Annual pricing should offer "2 months free," not "17% off." Same math, different psychology. People hate losing a discount more than they love getting one.
+- Price in round numbers for emotional purchases ($100, $200). Precise numbers ($497, $1,247) for analytical buyers, because precision signals calculated value.
+- Three tiers work because of the compromise effect: most people pick the middle. Design the middle tier to be your target revenue driver.
+- Free tiers create users, not customers. If you offer free, have a clear conversion trigger (usage limit, feature gate, time limit). Free without friction toward paid is a charity, not a business model.
+- Price increases are easier than you think. Test a 20% increase on new customers. If close rates don't drop more than 5%, keep it. Most founders underprice by 2-3x.
+- "Expensive" is relative to perceived alternatives, not absolute cost. Reframe the comparison: your $500/mo tool vs. the $6,000/mo employee doing the same job.
+- Discounting trains customers to wait for discounts. Use value-adds (extra months, bonus features) instead of price cuts when you need to close.
